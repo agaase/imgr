@@ -23,14 +23,21 @@
      */
     var imgrrClass = "imgrr";
 
+    /**
+     * error message to be printed on console.
+     * @type {String}
+     */
     var errorMessage = "imgr:error loading image";
     var elements = [];
-    var margin = 250;
     var scrollEl, evBinded = false,
-        checkingForLoad = false,
-        atOnce = false;
+        checkingForLoad = false;
 
     var context;
+
+    /**
+     * All the options parameters to be passed to the plugin.
+     */
+    var params = {};
 
 
     /**
@@ -61,7 +68,7 @@
             } else {
                 if (!elements.length) {
                     setTimeout(function() {
-                        if (!$("." + imgrClass + ",." + imgrrClass, context).length) {
+                        if (!$("." + imgrClass + ":not(." + imgrrdClass + "),." + imgrrClass + ":not(." + imgrrdClass + ")", context).length) {
                             $(window).unbind(evToBind);
                             evBinded = false;
                         }
@@ -93,7 +100,7 @@
         checkingForLoad = true;
         for (var i = 0; i < elements.length; i++) {
             var ele = $(elements[i]);
-            if (atOnce || isOnScreen(ele)) {
+            if (params.atOnce || isOnScreen(ele)) {
                 //ele=$("#"+ele.attr("id"));
                 loadImg(ele);
                 elements.splice(i, 1);
@@ -119,7 +126,7 @@
         var bounds = elem.offset();
         bounds.right = bounds.left + elem.outerWidth();
         bounds.bottom = bounds.top + elem.outerHeight();
-        if (!(viewport.right < (bounds.left - margin) || viewport.left > (bounds.right + margin) || viewport.bottom < (bounds.top - margin) || viewport.top > (bounds.bottom + margin))) {
+        if (!(viewport.right < (bounds.left - params.margin) || viewport.left > (bounds.right + params.margin) || viewport.bottom < (bounds.top - params.margin) || viewport.top > (bounds.bottom + params.margin))) {
             return true;
         }
     };
@@ -181,19 +188,29 @@
         }
     };
 
+    var setParams = function(options) {
+        options = options || {};
+        params.atOnce = options.atOnce || false;
+        params.margin = typeof(options.margin) !== "undefined" ? options.margin : 100;
+    };
+
     var setUpDom = function() {
         var newElements = $("." + imgrClass, context);
         var time = new Date().getTime();
         newElements.each(function(index) {
             var ele = $(this);
-            ele.attr("id", "imgr_" + time);
-            var loc = ele.offset();
-            ele.removeClass(imgrClass);
-            ele.addClass(imgrrClass);
-            ele.css({
-                "opacity": "0.05",
-                "background-color": "grey"
-            });
+            ele.attr("id", "imgr_" + index + "_" + time)
+                .addClass(imgrrClass)
+                .css({
+                    "opacity": "0.05",
+                    "background-color": "grey",
+                    "min-height": (ele.height() || 150) + "px",
+                    "min-width": (ele.width() || 150) + "px",
+                });
+
+            if (!ele.width()) {
+                ele.css("min-width", "100px");
+            }
         });
         if (!elements.length) {
             elements = newElements;
@@ -204,10 +221,9 @@
     $.fn.imgr = function(options) {
         context = $(this).length ? $(this) : $("body");
         scrollEl = $(window);
-        options = options || {};
-        atOnce = options.atOnce || false;
+        setParams(options);
         setUpDom();
-        if (!evBinded && !atOnce) {
+        if (!evBinded && !params.atOnce) {
             checkAndLoad();
             evBinded = true;
         }
