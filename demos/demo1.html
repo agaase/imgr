@@ -1,0 +1,31 @@
+<!doctype html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>New html page.</title>
+		<style>
+			img,div{
+				min-height: 300px;
+				min-width: 300px;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<script>
+			for(var i=1;i<13;i++){
+				if(i<10){
+					document.write("<img class='imgr' data-src='images/"+i+".jpg'/><br>");
+				}else{
+					document.write("<p>Background image</p><div class='imgr' data-src='images/"+i+".jpg'></div><br>");
+				}
+			}
+		</script>
+		</div>
+		<script src="../dist/imgr.js"></script>
+		<script>
+			$(".container").imgr();
+		</script>
+	</body>
+</html>
