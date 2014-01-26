@@ -16,7 +16,7 @@
     /**
      * The event to be handled which will trigger the check if the element is on screen.
      */
-    var evToBind;
+    var evToBind = "touchmove.imgr mousewheel.imgr";
     /**
      * The class to denote that an element has to be included in the imgr process.
      * @type {String}
@@ -32,18 +32,15 @@
      * @type {String}
      */
     var imgrrClass = "imgrr";
-    /**
-     * The html for the css loader. Any styling should be done on class- cssloader.
-     * @type {String}
-     */
-    var cssloaderDiv = "";
-    //<img src='../system/images/lazy_load.gif' />
+
     var errorMessage = "imgr:error loading image";
     var elements = [];
     var margin = 250;
     var scrollEl, evBinded = false,
         checkingForLoad = false,
         atOnce = false;
+
+    var context;
 
 
     /**
@@ -52,9 +49,8 @@
      */
     var checkAndLoad = function() {
         var checking = false,
-            timer = 0,
-            bindEvent = eventToBind();
-        $(window).bind(bindEvent, function(ev) {
+            timer = 0;
+        $(window).bind(evToBind, function(ev) {
             if (timer) {
                 clearTimeout(timer);
             }
@@ -75,8 +71,8 @@
             } else {
                 if (!elements.length) {
                     setTimeout(function() {
-                        if (!$("." + imgrClass + ",." + imgrrClass).length) {
-                            $(window).unbind(ev);
+                        if (!$("." + imgrClass + ",." + imgrrClass, context).length) {
+                            $(window).unbind(evToBind);
                             evBinded = false;
                         }
                     }, 5000);
@@ -148,12 +144,10 @@
      */
     var displayImg = function(type, ele, src) {
 
-        if (ele.hasClass(imgrrdClass))
+        if (ele.hasClass(imgrrdClass)) {
             return;
-        var loaderel = ele.prev();
-        if (loaderel.hasClass("cssloader")) {
-            loaderel.remove();
         }
+
         if (type === "div") {
             ele.css('background-image', 'url(' + src + ')');
         } else {
@@ -161,9 +155,12 @@
         }
         ele.removeClass(imgrrClass);
         ele.addClass(imgrrdClass);
-        /*ele.animate({
-      opacity:1
-    },2000);*/
+        ele.animate({
+            opacity: 1
+        }, 2000);
+        setTimeout(function() {
+            ele.css("background-color", "inherit");
+        }, 300);
     };
 
     /**
@@ -195,17 +192,18 @@
     };
 
     var setUpDom = function() {
-        var newElements = $("." + imgrClass);
+        var newElements = $("." + imgrClass, context);
         var time = new Date().getTime();
-        //Adding css loader to each class.
         newElements.each(function(index) {
             var ele = $(this);
-            ele.attr("id", "" + time + index);
-            var loader = $(cssloaderDiv);
-            ele.before(loader);
+            ele.attr("id", "imgr_" + time);
+            var loc = ele.offset();
             ele.removeClass(imgrClass);
             ele.addClass(imgrrClass);
-            // ele.css("opacity","0");
+            ele.css({
+                "opacity": "0.05",
+                "background-color": "grey"
+            });
         });
         if (!elements.length) {
             elements = newElements;
@@ -214,6 +212,7 @@
         }
     };
     $.fn.imgr = function(options) {
+        context = $(this).length ? $(this) : $("body");
         scrollEl = $(window);
         options = options || {};
         atOnce = options.atOnce || false;
