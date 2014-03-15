@@ -1,16 +1,6 @@
-/**
- * This plugin is used to load images as the scrolls or the dom element moves.
- * When the images are on screen then they will be triggered to load.
- * This also takes care of showing a loader till the images are not loaded.
- * Usage is pretty simple -
- * 1.Every image tag in html has to follow this syntax
- * <img src="" data-src="<imageurl>" class="imgr"/>
- * 2.At an appropriate place in yoiur code call Genwi.Plugins.imgr.run();
- * @namespace Genwi.Plugins
- * @class Imgr
- * @version 1.0
- * @author agaase
- */
+/*! imgr.js - v1.0.0 - 2014-01-26
+ * https://github.com/agaase/
+ * Copyright (c) 2014 agaase; Licensed MIT */
 (function($) {
 
     /**
@@ -66,13 +56,13 @@
 
                     var cnt = 0;
                     var inId = setInterval(function() {
-                        if (cnt < 3) {
-                            checkIfElementLoaded();
+                        if (cnt < 6) {
+                            loadIfOnScreen();
                             cnt++;
                         } else {
                             clearInterval(inId);
                         }
-                    }, 1000);
+                    }, 300);
 
                 }, 100);
             } else {
@@ -87,22 +77,11 @@
             }
         });
     };
-
-    var eventToBind = function() {
-        try {
-            document.createEvent("TouchEvent");
-            return "touchmove";
-        } catch (err) {
-            return "mousewheel";
-        }
-    };
-
     /**
-     * Checks for each element whether its loaded or not.
-     * @method checkIfElementLoaded
-     * @return {[type]}
+     * Checks if an element is on screen and loads it.
+     * @method loadIfOnScreen
      */
-    var checkIfElementLoaded = function() {
+    var loadIfOnScreen = function() {
 
         if (checkingForLoad) {
             return;
@@ -111,7 +90,6 @@
         for (var i = 0; i < elements.length; i++) {
             var ele = $(elements[i]);
             if (params.atOnce || isOnScreen(ele)) {
-                //ele=$("#"+ele.attr("id"));
                 loadImg(ele);
                 elements.splice(i, 1);
                 i--;
@@ -162,9 +140,13 @@
         }
         ele.removeClass(imgrrClass);
         ele.addClass(imgrrdClass);
-        ele.animate({
-            opacity: 1
-        }, 2000);
+        if (params.fadeIn) {
+            ele.animate({
+                opacity: 1
+            }, 2000);
+        } else {
+            ele.css("opacity", 1);
+        }
         setTimeout(function() {
             ele.css("background-color", "inherit");
         }, 300);
@@ -201,7 +183,8 @@
     var setParams = function(options) {
         options = options || {};
         params.atOnce = options.atOnce || false;
-        params.margin = typeof(options.margin) !== "undefined" ? options.margin : 100;
+        params.margin = typeof(options.margin) !== "undefined" ? options.margin : 50;
+        params.fadeIn = typeof(options.fadeIn) !== "undefined" ? options.fadeIn : false;
     };
 
     var setUpDom = function() {
@@ -237,6 +220,6 @@
             checkAndLoad();
             evBinded = true;
         }
-        checkIfElementLoaded();
+        loadIfOnScreen();
     };
 })($);

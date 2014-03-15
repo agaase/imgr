@@ -1,3 +1,6 @@
+/*! imgr.js - v1.0.0 - 2014-03-15
+* https://github.com/agaase/
+* Copyright (c) 2014 agaase; Licensed MIT */
 /*! imgr.js - v1.0.0 - 2014-01-26
  * https://github.com/agaase/
  * Copyright (c) 2014 agaase; Licensed MIT */
@@ -77,16 +80,6 @@
             }
         });
     };
-
-    var eventToBind = function() {
-        try {
-            document.createEvent("TouchEvent");
-            return "touchmove";
-        } catch (err) {
-            return "mousewheel";
-        }
-    };
-
     /**
      * Checks if an element is on screen and loads it.
      * @method loadIfOnScreen
