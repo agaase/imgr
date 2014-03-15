@@ -1,7 +1,7 @@
 imgr
 ====
 
-imgr is a lightweight mobile optimised jquery plugin to lazy load images as a background image or normal image element. The default behavior is to load images as user scrolls on the screen and element becomes
+imgr is a lightweight mobile optimised jquery plugin to lazy load images as a background image or normal image element. The default behavior is to load images as user scrolls on the screen and element becomes visible.
 
 ####How it works?
 The plugin checks the position of an image or a div (to be loaded as background image) once on every touchmove (for touch devices) or mousewheel(non touch devices) event with respect to the window or the visual viewport. If the element is within that bounds it loads that image.
