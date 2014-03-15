@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     stripBanners: true
                 },
                 files: {
-                    'dist/<%= distName %>.js': ['src/libs/*.js','src/*.js']
+                    'dist/<%= distName %>.<%= minSuffix %>.js': ['src/libs/*.js','src/*.js']
                 }
             }
         },
@@ -35,45 +35,40 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>'
                 },
                 files: {
-                    'dist/<%= distName %>.<%= minSuffix %>.js': ['dist/<%= distName %>.js'],
+                    'dist/<%= distName %>.<%= minSuffix %>.js': ['dist/<%= distName %>.<%= minSuffix %>.js'],
                 }
             }
         },
         jshint: {
             beforeconcat: {
                 options: {
-                    '-W055': true,
-                    '-W014': true
+                    curly: true,
+                    eqeqeq: true,
+                    immed: true,
+                    latedef: true,
+                    newcap: true,
+                    noarg: true,
+                    sub: true,
+                    undef: true,
+                    boss: true,
+                    eqnull: true,
+                    globals: {
+                        window: true,
+                        $: true,
+                        jQuery: true,
+                        Genwi: true,
+                        GENWI: true,
+                        console: true,
+                        alert: true,
+                        setTimeout: true,
+                        clearTimeout: true,
+                        setInterval: true,
+                        clearInterval: true,
+                        document: true,
+                    }
                 },
                 src: ['src/*.js']
-            },
-            afterconcat: ['dist/imgr.js'],
-            options: {
-                curly: true,
-                eqeqeq: true,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                boss: true,
-                eqnull: true,
-                globals: {
-                    window: true,
-                    $: true,
-                    jQuery: true,
-                    Genwi: true,
-                    GENWI: true,
-                    console: true,
-                    alert: true,
-                    setTimeout: true,
-                    clearTimeout: true,
-                    setInterval: true,
-                    clearInterval: true,
-                    document: true,
-                }
-            },
+            }
         }
     });
 
