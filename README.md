@@ -39,6 +39,12 @@ $(".container").imgr({
 1. Vertical scroll lazy loading  - demos/demo1
 2. Horizontal scroll lazy loading  - demos/demo1
 
+####Stages of image load
+You can use the class applied to image element at different stages to control the styling of the images.
+
+1. When the plugin is called and the image is not loaded yet. Class "imgrr" is applied to the image element.
+2. When the image is loaded (once its visible on screen). Class "imgrr" is removed and "imgrrd" is applied to the element.
+
 ####Installing and Building
  The dependencies and build is managed through grunt and you can use following steps to locally run grunt.
  
