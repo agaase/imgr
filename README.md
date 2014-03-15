@@ -27,6 +27,7 @@ $(".container").imgr({
 	margin:0,
 	fadeIn:false 
 });
+```
 
 ####Demos
 1. Vertical scroll lazy loading  - demos/demo1
