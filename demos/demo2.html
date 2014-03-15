@@ -6,14 +6,18 @@
 			div.imgr{
 				background-repeat: no-repeat;
 				background-size: cover;
+				width:300px;
+				height:150px;
 			}
 			img.imgr{
 				width: 300px;
 				height: 300px;
 			}
-			div.imgr{
-				width:300px;
-				height:150px;
+			.container{
+				width:3600px;
+			}
+			.imgr{
+				float: left;
 			}
 		</style>
 	</head>
@@ -22,9 +26,9 @@
 		<script>
 			for(var i=1;i<13;i++){
 				if(i<10){
-					document.write("<img class='imgr' data-src='images/"+i+".jpg'/><br>");
+					document.write("<img class='imgr' data-src='images/"+i+".jpg'/>");
 				}else{
-					document.write("<p>Background image</p><div class='imgr' data-src='images/"+i+".jpg'></div><br>");
+					document.write("<div class='imgr' data-src='images/"+i+".jpg'>Background image</div>");
 				}
 			}
 		</script>

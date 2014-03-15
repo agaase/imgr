@@ -150,9 +150,13 @@
         }
         ele.removeClass(imgrrClass);
         ele.addClass(imgrrdClass);
-        ele.animate({
-            opacity: 1
-        }, 2000);
+        if (params.fadeIn) {
+            ele.animate({
+                opacity: 1
+            }, 2000);
+        } else {
+            ele.css("opacity", 1);
+        }
         setTimeout(function() {
             ele.css("background-color", "inherit");
         }, 300);
@@ -189,7 +193,8 @@
     var setParams = function(options) {
         options = options || {};
         params.atOnce = options.atOnce || false;
-        params.margin = typeof(options.margin) !== "undefined" ? options.margin : 100;
+        params.margin = typeof(options.margin) !== "undefined" ? options.margin : 50;
+        params.fadeIn = typeof(options.fadeIn) !== "undefined" ? options.fadeIn : false;
     };
 
     var setUpDom = function() {

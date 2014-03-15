@@ -27,3 +27,7 @@ $(".container").imgr({
 	margin:0,
 	fadeIn:false 
 });
+
+####Demos
+1. Vertical scroll lazy loading  - demos/demo1
+1. Horizontal scroll lazy loading  - demos/demo1
