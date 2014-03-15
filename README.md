@@ -8,6 +8,7 @@ The plugin checks the position of an image or a div (to be loaded as background 
 
 
 ####How to use it?.
+
 1. An image element or an element with background image must be assigned a class "imgr" with its data-src attribute set to the url of the image.
 ```
 <img class='imgr' data-src='imageurl'/>
@@ -36,10 +37,11 @@ $(".container").imgr({
 
 ####Demos
 1. Vertical scroll lazy loading  - demos/demo1
-1. Horizontal scroll lazy loading  - demos/demo1
+2. Horizontal scroll lazy loading  - demos/demo1
 
 ####Installing and Building
  The dependencies and build is managed through grunt and you can use following steps to locally run grunt.
+ 
 1. Clone the git project
 2. run - npm install (installs npm dependencies)
 3. run - grunt (runs jshint,cleans and builds the files under dist/).
