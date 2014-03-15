@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     stripBanners: true
                 },
                 files: {
-                    'dist/<%= distName %>.<%= minSuffix %>.js': ['src/libs/*.js','src/*.js']
+                    'dist/<%= distName %>.<%= minSuffix %>.js': ['src/*.js']
                 }
             }
         },
