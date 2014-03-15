@@ -1,6 +1,6 @@
 /*! imgr.js - v1.0.0 - 2014-01-26
-* https://github.com/agaase/
-* Copyright (c) 2014 agaase; Licensed MIT */
+ * https://github.com/agaase/
+ * Copyright (c) 2014 agaase; Licensed MIT */
 (function($) {
 
     /**
@@ -56,13 +56,13 @@
 
                     var cnt = 0;
                     var inId = setInterval(function() {
-                        if (cnt < 3) {
-                            checkIfElementLoaded();
+                        if (cnt < 6) {
+                            loadIfOnScreen();
                             cnt++;
                         } else {
                             clearInterval(inId);
                         }
-                    }, 1000);
+                    }, 300);
 
                 }, 100);
             } else {
@@ -88,11 +88,10 @@
     };
 
     /**
-     * Checks for each element whether its loaded or not.
-     * @method checkIfElementLoaded
-     * @return {[type]}
+     * Checks if an element is on screen and loads it.
+     * @method loadIfOnScreen
      */
-    var checkIfElementLoaded = function() {
+    var loadIfOnScreen = function() {
 
         if (checkingForLoad) {
             return;
@@ -101,7 +100,6 @@
         for (var i = 0; i < elements.length; i++) {
             var ele = $(elements[i]);
             if (params.atOnce || isOnScreen(ele)) {
-                //ele=$("#"+ele.attr("id"));
                 loadImg(ele);
                 elements.splice(i, 1);
                 i--;
@@ -218,7 +216,7 @@
             elements = $.merge(elements, newElements);
         }
     };
-    $.fn.imgr = function(options) {
+    $.imgr = $.fn.imgr = function(options) {
         context = $(this).length ? $(this) : $("body");
         scrollEl = $(window);
         setParams(options);
@@ -227,6 +225,6 @@
             checkAndLoad();
             evBinded = true;
         }
-        checkIfElementLoaded();
+        loadIfOnScreen();
     };
 })($);
