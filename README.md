@@ -19,7 +19,7 @@ The plugin checks the position of an image or a div (to be loaded as background 
 ```
 $("rootSelector").imgr(options) 
 //rootSelector is the rootContainer selector where all your elements to be loaded are present.
-//Pass empty for default body to be picked up.
+//Pass empty string for default body to be picked up.
 ```
 
 ####Configurational parameters.
