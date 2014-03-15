@@ -7,13 +7,19 @@ This is jquery plugin to load images as a background image or normal image eleme
 The plugin checks the position of an image or a div (to be loaded as background image) once on every touchmove (for touch devices) or mousewheel(non touch devices) event with respect to the window or the visual viewport. If the element is within that bounds it loads that image. 
 
 
-####How to use it?
-The usage is pretty simple 
+####How to use it?.
 1. An image element or an element with background image must be assigned a class "imgr" with its data-src attribute set to the url of the image.
+```
+<img class='imgr' data-src='imageurl'/>
+	OR
+<div class='imgr' data-src='imageurl'>Background image</div>
+```
 2. In your javascript you can call the plugin in two ways.
 ```
-$("rootSelector").imgr(options) OR $.imgr(options)
+$("rootSelector").imgr(options) 
 //rootSelector is the rootContainer selector where all your elements to be loaded are present.
+    OR 
+$.imgr(options)
 ```
 
 ####Configurational parameters.
