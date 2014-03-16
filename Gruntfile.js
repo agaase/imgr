@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>'
                 },
                 files: {
-                    'dist/<%= distName %>-<%= meta.version %>.<%= minSuffix %>.js': ['dist/<%= distName %>.<%= minSuffix %>.js'],
+                    'dist/<%= distName %>-<%= meta.version %>.<%= minSuffix %>.js': ['dist/<%= distName %>-<%= meta.version %>.<%= minSuffix %>.js'],
                 }
             }
         },
