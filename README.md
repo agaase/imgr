@@ -36,8 +36,8 @@ $(".container").imgr({
 ```
 
 ####Demos
-1. Vertical scroll lazy loading  - demos/demo1
-2. Horizontal scroll lazy loading  - demos/demo1
+1. [Vertical scroll lazy loading](http://agaase.github.io/webpages/imgr/demos/demo1.html)
+2. [Horizontal scroll lazy loading](http://agaase.github.io/webpages/imgr/demos/demo2.html)
 
 ####Stages of image load
 You can use the class applied to image element at different stages to control the styling of the images.
