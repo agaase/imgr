@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     stripBanners: true
                 },
                 files: {
-                    'dist/<%= distName %>.<%= minSuffix %>.js': ['src/*.js']
+                    'dist/<%= distName %>-<%= meta.version %>.<%= minSuffix %>.js': ['src/*.js']
                 }
             }
         },
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>'
                 },
                 files: {
-                    'dist/<%= distName %>.<%= minSuffix %>.js': ['dist/<%= distName %>.<%= minSuffix %>.js'],
+                    'dist/<%= distName %>-<%= meta.version %>.<%= minSuffix %>.js': ['dist/<%= distName %>.<%= minSuffix %>.js'],
                 }
             }
         },
